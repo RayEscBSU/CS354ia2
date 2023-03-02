@@ -38,34 +38,35 @@ DESCRIPTION
 
 
 FILES
-       tst - test director 
+       tst - test directory 
               test-minus    - stores test files that test minus opperations
               test-plus     - stores test files that test plus opperations
               test-tw0      - stores test files that test two mathematical 
                               opperations. May re-use variables calculated 
                               in the first test
               run - used to run test 
-       IA1
-              Code.java - deq fundtion implementations
-              Environment.java - deq function declerations
-              EvalException.java - error function declerations
-              Grammar - specifies grammer
-              Main.java (provided) - 
-              Node.java (provided) -
-              NodeAddop.java (provided) - 
-              NodeAssn.java (provided) - 
-              NodeExpr.java method
-              NodeFact.java -
-              NodeFactExpr.java (provided) - 
-              NodeMulop.java (provided) - 
-              NodeStmt.java - 
-              NodeTerm.jav - 
-              NodeWr.java
-              Parser.ljava - 
+       IA1 - contains source files
+              Code.java (provided) - Used for C code
+              Environment.java (provided) - defines environment
+              EvalException.java (provided) - defines EvalException
+              Grammar (provided) - specifies grammer
+              Main.java (provided) - Main class for program
+              Node.java (provided) - Models parse tree nodes
+              NodeAddop.java (provided) - Defiens NodeAddop
+              NodeAssn.java (provided) - Defines NodeAssn
+              NodeExpr.java (provided) - defines NodeExpr
+              NodeFactExpr.java (provided) - defines FactExpr
+              NodeFactID.java (provided) - defines FactID
+              NodeFactNum.java (provided) - defines factor opp
+              NodeMulop.java (provided) - defines multiplication opp
+              NodeStmt.java (provided) - defines NodeStmt
+              NodeTerm.jav (provided) - defines NodeTerm 
+              NodeWr.java (provided) - evaluate expr
+              Parser.ljava (provided) - parser based on grammer
               README - read me
-              Scannar. java - scanner
-              SyntaxException.java - 
-              Token.java - 
+              Scannar. java (provided) - scanner for program
+              SyntaxException.java (provided) - handles syntax exceptions 
+              Token.java (provided) - models a token
        
 
 Results 
