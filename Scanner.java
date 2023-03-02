@@ -275,6 +275,7 @@ public class Scanner {
 			return false;
 		}
 		String c=program.charAt(pos)+"";
+		checkComment();
 		if (digits.contains(c))
 			nextNumber();
 		else if (letters.contains(c))
@@ -302,7 +303,6 @@ public class Scanner {
 				past('\n');
 			}
 		}
-		next(); 
 	}
 
 	// This method scans the next lexeme,

@@ -34,3 +34,9 @@ NodeTerm.class
 NodeWr.class
 Parser.class
 Scanner.class
+test/test-commments/gccerrs
+test/test-commments/gen
+test/test-commments/gen.c
+test/test-commments/inp
+test/test-commments/out.c
+test/test-commments/out.i
