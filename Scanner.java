@@ -290,31 +290,20 @@ public class Scanner {
 	}
 
 	// This method determines if the next character is a comment "#"
-	// public void insideComment() {
-	// 	boolean inComment = false; 
-	// 	int old=pos;
-	// 	many(comments);
-
-
-
-	// 	if (done()) {
-	// 		token=new Token("EOF");
-	// 		return false;
-	// 	}
-	// 	String c=program.charAt(pos)+"";
-	// 	if (comments.contains(c))
-	// 		inComment = true; 
-	// 	else if (letters.contains(c))
-	// 		nextKwId();
-	// 	else if (operators.contains(c))
-	// 		nextOp();
-	// 	else {
-	// 		System.err.println("illegal character at position "+pos);
-	// 		pos++;
-	// 		return next();
-	// 	}
-	// 	return true;
-	// }
+	// in the current line, It skips everything after "#" until the
+	// the end of line
+	public void checkComment() {
+		// inside a comment return true
+		// move to the end of line
+		// else return false
+		int old=pos;
+		while(!done()){
+			if(program.charAt(old) == '#'){
+				past('\n');
+			}
+			
+		}
+	}
 
 	// This method scans the next lexeme,
 	// if the current token is the expected token.
