@@ -16,6 +16,7 @@ public class Scanner {
 	private Set<String> legits=new HashSet<String>();
 	private Set<String> keywords=new HashSet<String>();
 	private Set<String> operators=new HashSet<String>();
+	private Set<String> comments=new HashSet<String>();
 
 	// initializers for previous sets
 
@@ -115,6 +116,18 @@ public class Scanner {
 		s.add(";");
 	}
 
+	// This method defines initComments, it takes a set
+	// of stirings "s" then adds the comment characters
+	// Resulting set contianing only those comment
+	// characters 
+	// Can be used to check if a given sting contains 
+	// any of these comments characters
+	// Arguments:
+	//     s  = Set of strings passed in 
+	private void initComments(Set<String> s) {
+		s.add("#");
+	}
+
 	// This method defines initKeywords, it takes a set
 	// of stirings "s" 
 	// Arguments:
@@ -135,6 +148,7 @@ public class Scanner {
 		initLegits(legits);
 		initKeywords(keywords);
 		initOperators(operators);
+		initComments(comments); 
 	}
 
 	// handy string-processing methods
@@ -255,6 +269,28 @@ public class Scanner {
 	// This method determines the kind of the next token (e.g., "id"),
 	// and calls a method to scan that token's lexeme (e.g., "foo").
 	public boolean next() {
+		many(whitespace);
+		if (done()) {
+			token=new Token("EOF");
+			return false;
+		}
+		String c=program.charAt(pos)+"";
+		if (digits.contains(c))
+			nextNumber();
+		else if (letters.contains(c))
+			nextKwId();
+		else if (operators.contains(c))
+			nextOp();
+		else {
+			System.err.println("illegal character at position "+pos);
+			pos++;
+			return next();
+		}
+		return true;
+	}
+
+	// This method determines if the next character is a comment "#"
+	public boolean insideComment() {
 		many(whitespace);
 		if (done()) {
 			token=new Token("EOF");

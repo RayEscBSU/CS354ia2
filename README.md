@@ -34,6 +34,9 @@ DESCRIPTION
                      - Change the translator to support double values instead of 
                       integer values 
 
+              Impelement fucntions
+                     private void initComments(Set<String> s) - 
+
 
 
 
