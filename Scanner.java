@@ -301,8 +301,8 @@ public class Scanner {
 			if(program.charAt(old) == '#'){
 				past('\n');
 			}
-			
 		}
+		next(); 
 	}
 
 	// This method scans the next lexeme,
