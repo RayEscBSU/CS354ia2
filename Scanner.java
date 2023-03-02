@@ -22,7 +22,7 @@ public class Scanner {
 	// This method takes three parameters: s, lo, hi
 	// It traverses the set passed from lo(exclusive)
 	// to hi(inclusive) 
-	// Returns a set contianing only the characters in
+	// Resulting set contianing only the characters in
 	// that range
 	// Arguments:
 	//    s  = Set of strings passed in 
@@ -39,7 +39,8 @@ public class Scanner {
 	// This method defines initWhitespace, it
 	// takes a set of stirings "s" then individually 
 	// adds a space, newline, and tab charceters to it. 
-	//
+	// Resulting set contianing only those three 
+	// white space characters 
 	// Can be used to check if a given sting contains 
 	// any of these whitespcae characters
 	// Arguments:
@@ -53,9 +54,11 @@ public class Scanner {
 	// This method defines initDigits, it takes a set
 	// of stirings "s" then calls fill to add digits 
 	// from 0 - 9 to string s
-	// Arguments:
+	// Resulting set contianing only those specified 
+	// digit characters 
 	// Can be used to check if a given sting contains 
 	// any of these digit characters
+	// Arguments:
 	//     s  = Set of strings passed in 
 	private void initDigits(Set<String> s) {
 		fill(s,'0','9');
@@ -64,9 +67,11 @@ public class Scanner {
 	// This method defines initLetters, it takes a set
 	// of stirings "s" then calls fill to add letters 
 	// from A - Z, and a - z to string s
-	// Arguments:
+	// Resulting set contianing only those specified 
+	// letter characters 
 	// Can be used to check if a given sting contains 
 	// any of these letter characters
+	// Arguments:
 	//     s  = Set of strings passed in 
 	private void initLetters(Set<String> s) {
 		fill(s,'A','Z');
@@ -74,11 +79,13 @@ public class Scanner {
 	}
 
 	// This method defines initLetters, it takes a set
-	// of stirings "s" then adds  all the letters and 
+	// of stirings "s" then adds all the letters and 
 	// digets from the "letters" and "digits" HashSets
-	// Arguments:
+	// Resulting set contianing only those specified 
+	// letters and digit characters 
 	// Can be used to check if a given sting contains 
-	// any of these letter characters
+	// any of these letters and digits characters
+	// Arguments:
 	//     s  = Set of strings passed in 
 	// Members:
 	//     letters = HashSet created by init letters	
@@ -88,6 +95,15 @@ public class Scanner {
 		s.addAll(digits);
 	}
 
+	// This method defines initOperators, it takes a set
+	// of stirings "s" then adds all of the mathematical
+	// opperators 
+	// Resulting set contianing only those specified 
+	// mathematical operator characters 
+	// Can be used to check if a given sting contains 
+	// any of these operators characters
+	// Arguments:
+	//     s  = Set of strings passed in 
 	private void initOperators(Set<String> s) {
 		s.add("=");
 		s.add("+");
@@ -99,6 +115,10 @@ public class Scanner {
 		s.add(";");
 	}
 
+	// This method defines initKeywords, it takes a set
+	// of stirings "s" 
+	// Arguments:
+	//     s  = Set of strings passed in 
 	private void initKeywords(Set<String> s) {
 	}
 
@@ -119,10 +139,20 @@ public class Scanner {
 
 	// handy string-processing methods
 
+	// This method returns true if the 
+	// we are at the end of the file 
 	public boolean done() {
 		return pos>=program.length();
 	}
 
+	// This method is used to check if we have 
+	// not reached the end and there are more
+	// characters left to read
+	// The "pos" variable is moved to the next char
+	// that matches the set "s"
+	// Loop continues as long as the "done" method
+	// returns false and the Set "s" contains the
+	// character at the current index in "program."
 	private void many(Set<String> s) {
 		while (!done()&&s.contains(program.charAt(pos)+""))
 			pos++;
@@ -146,12 +176,40 @@ public class Scanner {
 
 	// scan various kinds of lexeme
 
+	// This method is used create a token substring 
+	// from the "old" to "pos". Calls many to advance
+	// the pointer to the end of "digits" tokens until
+	// the next character is no longer in the set
+	// Members: 
+	//   old - Intiger variables use to store 
+	//		  "pos" value
+	//   digits - HashSet containing only digits
+	//   pos - index of the next char in program 
+	//   token - new token created from substring
 	private void nextNumber() {
 		int old=pos;
 		many(digits);
 		token=new Token("num",program.substring(old,pos));
 	}
 
+	// This method is used create a token substring 
+	// from the "old" to "pos". Calls "many" to advance
+	// the pointer to the end of the "letters" and 
+	// "legits" tokens  until the next character 
+	//  is no longer in the set
+	//
+	// It then checks if the substirng is a keyword, 
+	// if it is then it is used as a token type, if
+	// not it is marked as an "id"
+	//
+	// Members: 
+	//   old - Intiger variables use to store 
+	//		  "pos" value
+	//   letters - HashSet containing only letters
+	// 	 legits - HashSet containing only legits
+	//   pos - index of the next char in program 
+	// 	 lexeme - stores substring from "old" - "pos"
+	//   token - new token created contains token type 
 	private void nextKwId() {
 		int old=pos;
 		many(letters);
@@ -160,6 +218,25 @@ public class Scanner {
 		token=new Token((keywords.contains(lexeme) ? lexeme : "id"),lexeme);
 	}
 
+	// This method is used create a token substring 
+	// from the "old" to "pos". It checks if the 
+	// lexeme contains an operator, if it does it
+	// creates a new token object conatianing the 
+	// operator lexmeme
+	//
+	// If it reaches an invalid charactor or the end 
+	// of the input, it moves the position back then
+	// creates a new lexeme from the substring, finally
+	// it creates a new token from the lexeme
+	//
+	// Members: 
+	//   old - Intiger variables use to store 
+	//		  "pos" value
+	//   letters - HashSet containing only letters
+	// 	 legits - HashSet containing only legits
+	//   pos - index of the next char in program 
+	// 	 lexeme - stores substring from "old" - "pos"
+	//   token - new token created contains token type 
 	private void nextOp() {
 		int old=pos;
 		pos=old+2;
@@ -206,12 +283,19 @@ public class Scanner {
 		next();
 	}
 
+	// This method checks if "token" is null
+	// Throws exception if null else returns "token"
+	// Members:
+	// 	token - last/current scanned token
 	public Token curr() throws SyntaxException {
 		if (token==null)
 			throw new SyntaxException(pos,new Token("ANY"),new Token("EMPTY"));
 		return token;
 	}
 
+	// This method returns the position
+	// Members: 
+	// 	pos - index of the next char in program 
 	public int pos() {
 		return pos;
 	}
