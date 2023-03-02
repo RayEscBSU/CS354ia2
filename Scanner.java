@@ -19,26 +19,70 @@ public class Scanner {
 
 	// initializers for previous sets
 
+	// This method takes three parameters: s, lo, hi
+	// It traverses the set passed from lo(exclusive)
+	// to hi(inclusive) 
+	// Returns a set contianing only the characters in
+	// that range
+	// Arguments:
+	//    s  = Set of strings passed in 
+	//	  lo = Start charactars to beign adding to set s
+	// 	  hi = Ending charcater to stop adding to set s  
+	// Members:
+	//     program = the scanner's input
+	//     pos = index of current input character
 	private void fill(Set<String> s, char lo, char hi) {
 		for (char c=lo; c<=hi; c++)
 			s.add(c+"");
 	}
-
+	
+	// This method defines initWhitespace, it
+	// takes a set of stirings "s" then individually 
+	// adds a space, newline, and tab charceters to it. 
+	//
+	// Can be used to check if a given sting contains 
+	// any of these whitespcae characters
+	// Arguments:
+	//     s  = Set of strings passed in 
 	private void initWhitespace(Set<String> s) {
 		s.add(" ");
 		s.add("\n");
 		s.add("\t");
 	}
 
+	// This method defines initDigits, it takes a set
+	// of stirings "s" then calls fill to add digits 
+	// from 0 - 9 to string s
+	// Arguments:
+	// Can be used to check if a given sting contains 
+	// any of these digit characters
+	//     s  = Set of strings passed in 
 	private void initDigits(Set<String> s) {
 		fill(s,'0','9');
 	}
 
+	// This method defines initLetters, it takes a set
+	// of stirings "s" then calls fill to add letters 
+	// from A - Z, and a - z to string s
+	// Arguments:
+	// Can be used to check if a given sting contains 
+	// any of these letter characters
+	//     s  = Set of strings passed in 
 	private void initLetters(Set<String> s) {
 		fill(s,'A','Z');
 		fill(s,'a','z');
 	}
 
+	// This method defines initLetters, it takes a set
+	// of stirings "s" then adds  all the letters and 
+	// digets from the "letters" and "digits" HashSets
+	// Arguments:
+	// Can be used to check if a given sting contains 
+	// any of these letter characters
+	//     s  = Set of strings passed in 
+	// Members:
+	//     letters = HashSet created by init letters	
+	//     digits = HashSet created by init digits
 	private void initLegits(Set<String> s) {
 		s.addAll(letters);
 		s.addAll(digits);
