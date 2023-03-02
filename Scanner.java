@@ -290,15 +290,20 @@ public class Scanner {
 	}
 
 	// This method determines if the next character is a comment "#"
-	public boolean insideComment() {
-		many(whitespace);
+	public void insideComment() {
+		boolean inComment = false; 
+		int old=pos;
+		many(comments);
+
+
+
 		if (done()) {
 			token=new Token("EOF");
 			return false;
 		}
 		String c=program.charAt(pos)+"";
-		if (digits.contains(c))
-			nextNumber();
+		if (comments.contains(c))
+			inComment = true; 
 		else if (letters.contains(c))
 			nextKwId();
 		else if (operators.contains(c))
