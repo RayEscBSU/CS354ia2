@@ -275,13 +275,19 @@ public class Scanner {
 			return false;
 		}
 		String c=program.charAt(pos)+"";
-		checkComment();
+		if(checkComment()){
+			past('\n');
+			return next();
+		}
 		if (digits.contains(c))
 			nextNumber();
 		else if (letters.contains(c))
 			nextKwId();
 		else if (operators.contains(c))
 			nextOp();
+		else if (operators.contains('#')){
+			past('\n');
+		}
 		else {
 			System.err.println("illegal character at position "+pos);
 			pos++;
@@ -293,16 +299,15 @@ public class Scanner {
 	// This method determines if the next character is a comment "#"
 	// in the current line, It skips everything after "#" until the
 	// the end of line
-	public void checkComment() {
+	public boolean checkComment() {
 		// inside a comment return true
 		// move to the end of line
 		// else return false
 		int old=pos;
-		while(!done()){
 			if(program.charAt(old) == '#'){
-				past('\n');
+				return true;
 			}
-		}
+		return false;
 	}
 
 	// This method scans the next lexeme,

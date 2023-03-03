@@ -4,9 +4,11 @@ expr  : term addop expr
       | term
 term  : fact mulop term
       | fact
-fact  : id 
+fact  : id
+      | unary fact
       | num
       | '(' expr ')'
+unary : '-'
 addop : '+'
       | '-'
 mulop : '*'
