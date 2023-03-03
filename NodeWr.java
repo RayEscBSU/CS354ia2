@@ -7,8 +7,8 @@ public class NodeWr extends Node {
 	}
 
 	public double eval(Environment env) throws EvalException {
-		int d=expr.eval(env);
-		int i=(int) d;
+		double d=expr.eval(env);
+		double i= d;
 		if (i==d)
 			System.out.println(i);
 		else
