@@ -47,7 +47,7 @@ public class Parser {
 		if (curr().equals(new Token("-"))) {
 			match("-");
 			NodeFact f = parseFact();
-			return new NodeFactNeg(fact);
+			return new NodeFactNeg(f);
 		}
 		if (curr().equals(new Token("("))) {
 			match("(");

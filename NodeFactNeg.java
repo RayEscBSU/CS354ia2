@@ -1,8 +1,8 @@
 public class NodeFactNeg extends NodeFact {
 
-	private NodeExpr fact;
+	private NodeFact fact;
 
-	public NodeFactNeg(NodeExpr fact) {
+	public NodeFactNeg(NodeFact fact) {
 		this.fact=fact;
 	}
 
