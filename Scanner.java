@@ -279,15 +279,12 @@ public class Scanner {
 			past('\n');
 			return next();
 		}
-		if (digits.contains(c))
+		else if (digits.contains(c))
 			nextNumber();
 		else if (letters.contains(c))
 			nextKwId();
 		else if (operators.contains(c))
 			nextOp();
-		else if (operators.contains('#')){
-			past('\n');
-		}
 		else {
 			System.err.println("illegal character at position "+pos);
 			pos++;
@@ -297,12 +294,9 @@ public class Scanner {
 	}
 
 	// This method determines if the next character is a comment "#"
-	// in the current line, It skips everything after "#" until the
-	// the end of line
+	// in the current line,
+	// Returns true if a comment is found
 	public boolean checkComment() {
-		// inside a comment return true
-		// move to the end of line
-		// else return false
 		int old=pos;
 			if(program.charAt(old) == '#'){
 				return true;
