@@ -63,6 +63,7 @@ public class Scanner {
 	//     s  = Set of strings passed in 
 	private void initDigits(Set<String> s) {
 		fill(s,'0','9');
+		s.add(".");
 	}
 
 	// This method defines initLetters, it takes a set

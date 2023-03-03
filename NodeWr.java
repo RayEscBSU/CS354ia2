@@ -10,7 +10,7 @@ public class NodeWr extends Node {
 		double d=expr.eval(env);
 		double i= d;
 		if (i==d)
-			System.out.println(i);
+			System.out.println((int)i);
 		else
 			System.out.println(d);
 		return d;
