@@ -6,7 +6,6 @@ term  : fact mulop term
       | fact
 fact  : id
       | unary fact
-      | num
       | '(' expr ')'
 unary : '-'
 addop : '+'

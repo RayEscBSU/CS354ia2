@@ -63,7 +63,6 @@ public class Environment {
 		return d;
 	}
 
-//	//Turns our string to C code my using the mapped set
 //	public String toC() {
 //		String s = "";
 //		String sep = " ";
@@ -74,7 +73,6 @@ public class Environment {
 //		return s == "" ? "" : "int" + s + ";\nx=0;x=x;\n" + toC(hashM);
 //	}
 
-	//Same thing but here we turn to C based on every map variable
 	public String toC() {
 		String s = "";
 		String sep = " ";
