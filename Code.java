@@ -2,16 +2,22 @@ import java.io.*;
 
 public class Code {
 
+	//include the following at the beginning of
+	// generated C code
 	private final String[] prologue={
 		"#include <stdio.h>",
 		"int main() {",
 	};
 
+	//include the following at the end of
+	// generated C code
 	private final String[] epilogue={
 		"return 0;",
 		"}",
 	};
 
+	// check if env is null, create / read file
+	// write prolog and epilogue to C file
 	public Code(String code, Environment env) {
 		String fn=System.getenv("Code");
 		if (fn==null)

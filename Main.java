@@ -6,6 +6,9 @@
 
 public class Main {
 
+	//Create parser, environment, and code variables
+	// Call parser and node eval
+	// create new Code with returned values
 	public static void main(String[] args) {
 		Parser parser=new Parser();
 		Environment env=new Environment();

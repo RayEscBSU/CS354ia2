@@ -15,32 +15,8 @@
 
 import java.util.HashMap;
 
-//public class Environment {
-//
-//	private String[] map = { "x" };
-//
-//	public int put(String var, int val) {
-//		return val;
-//	}
-//
-//	public int get(int pos, String var) throws EvalException {
-//		return 0;
-//	}
-//
-//	public String toC() {
-//		String s = "";
-//		String sep = " ";
-//		for (String v : map) {
-//			s += sep + v;
-//			sep = ",";
-//		}
-//		return s == "" ? "" : "int" + s + ";\nx=0;x=x;\n";
-//	}
-//
-//}
-
-
 public class Environment {
+	//Hashmap to store string and double values
 	private HashMap<String, Double> hashM;
 
 	//Constructor
@@ -62,17 +38,6 @@ public class Environment {
 		}
 		return d;
 	}
-
-//	public String toC() {
-//		String s = "";
-//		String sep = " ";
-//		for (String v : hashM.keySet()) {
-//			s += sep + v;
-//			sep = ",";
-//		}
-//		return s == "" ? "" : "int" + s + ";\nx=0;x=x;\n" + toC(hashM);
-//	}
-
 	public String toC() {
 		String s = "";
 		String sep = " ";
