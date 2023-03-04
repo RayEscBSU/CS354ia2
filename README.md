@@ -76,7 +76,7 @@ FILES
        
 
 Results
-       Refer to testResults.txt
+       Refer to included file testResults
 
        I did run in to an issue when testing the expected out put for doubles. For 
        example prog = 1.0 + 1.0, exp = 2.0, my out.i file would match the expected
@@ -98,6 +98,7 @@ Teting
        I created my own test to better evaluate my code implementation. 
        My custom test are also stored in the 'test directory.
               Test include : 
+                     test-comments - test skip comment lines
                      test-plus - test adding (int and double)
                      test-minus - test subtraction (int and double)
                      test-mul - test multiply (int and double)
