@@ -1,4 +1,0 @@
-test-plusDouble4/gen.c:3:10: warning: variable 'x' set but not used [-Wunused-but-set-variable]
-  double x;
-         ^
-1 warning generated.

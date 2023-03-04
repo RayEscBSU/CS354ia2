@@ -1,0 +1,7 @@
+test-mul/gen.c:12:12: error: expression is not assignable
+  x = 10 * --10;
+           ^ ~~
+test-mul/gen.c:13:32: error: expression is not assignable
+  printf("%g\n", (double)(10 * --10));
+                               ^ ~~
+2 errors generated.

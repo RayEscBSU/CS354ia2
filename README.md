@@ -72,9 +72,15 @@ FILES
               Token.java (provided) - models a token
        
 
-Results 
-       
-
+Results
+       Test results 
+              plus                           minus
+              |   prg       |   exp.i     |     prg      |   exp.i     |
+              | ----------- | ----------- |  ----------- | ----------- |
+              |   x=1+2;    |   Title     |    Header    |   Title     |
+              |   x=3+4;    |   Text      |    Paragraph |   Text      |
+              | x=10.0+10.0;|   Title     |    Header    |   Title     |
+              |   x=3+4;    |   Text      |    Paragraph |   Text      |
 
 Teting 
        Testing was done using the regression tester. Test files
