@@ -25,27 +25,30 @@ DESCRIPTION
        target language is C. 
 
               TODO:
-                     - Finish documenting provided source code in Scanner.java
-                     - Extend the scanner to support source-code comments, design
-                       our own form of comments
-                     - Change the Environment object to translate each command 
-                      line argument as exactly one assignment statement
-                     - Add a prefix unary mins operator
-                     - Change the translator to support double values instead of 
-                      integer values 
+                     A - Finish documenting provided source code in Scanner.java
+                     B - Extend the scanner to support source-code comments, design
+                            our own form of comments
+                     C - Change the Environment object to translate each command
+                            line argument as exactly one assignment statement
+                     D - Add a prefix unary mins operator
+                     E- Change the translator to support double values instead of 
+                            integer values 
 
-              Impelement fucntions
-                     private void initComments(Set<String> s) - 
-
-
-
+              What I did 
+                     A - Finished document all functions for all files included
+                     B - Extended the the scanner to accept comment lines that 
+                         start with "#", comment lines are completly skipped
+                     C - Created a HashMap to store var and val values 
+                     D - Added a unary variable to my grammer that allows '-'
+                     E - Change all functions from "int" to "double",  added 
+                            "." do the digits set
 
 FILES
        tst - test directory 
-              test-minus    - stores test files that test minus opperations
-              test-plus     - stores test files that test plus opperations
+              test-minus    - stores test files that test minus operations
+              test-plus     - stores test files that test plus operations
               test-tw0      - stores test files that test two mathematical 
-                              opperations. May re-use variables calculated 
+                              operations. May re-use variables calculated 
                               in the first test
               run - used to run test 
        IA1 - contains source files
@@ -73,25 +76,34 @@ FILES
        
 
 Results
-       Test results 
-              plus                           minus
-              |   prg       |   exp.i     |     prg      |   exp.i     |
-              | ----------- | ----------- |  ----------- | ----------- |
-              |   x=1+2;    |   Title     |    Header    |   Title     |
-              |   x=3+4;    |   Text      |    Paragraph |   Text      |
-              | x=10.0+10.0;|   Title     |    Header    |   Title     |
-              |   x=3+4;    |   Text      |    Paragraph |   Text      |
+       Refer to testResults.txt
+
+       I did run in to an issue when testing the expected out put for doubles. For 
+       example prog = 1.0 + 1.0, exp = 2.0, my out.i file would match the expected
+       value of 2.0, but my test would still fail. It was calculating the correct 
+       values but failing my test, as a workaround I casted my values to an int and
+       so that it would pass the regression tester. Because of this I am not able 
+       to compute percentages as a double. Such as 2.0 / 4.0 = .5. 
+       
+
 
 Teting 
        Testing was done using the regression tester. Test files
-       are located in the the 'test' directory. 
+       are located in the 'test' directory.
 
        We were provided with a few test file examples that show us how 
        the test suit works. However these test were not complex enough
        and did not account for many scenarios. 
 
        I created my own test to better evaluate my code implementation. 
-       My custom test are also stored in the 'test directory. 
+       My custom test are also stored in the 'test directory.
+              Test include : 
+                     test-plus - test adding (int and double)
+                     test-minus - test subtraction (int and double)
+                     test-mul - test multiply (int and double)
+                     test-divide - test divide (int and double)
+                     teest-two - test muntiple prog files (int and double)
+                     test-unearthly - test weird inputs, Ex "==", "++"
             
 
 
