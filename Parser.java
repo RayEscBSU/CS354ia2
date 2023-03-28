@@ -150,6 +150,7 @@ public class Parser {
 			match("rd");
 			Token id = curr();
 			match("id");
+			match(";");
 			return new NodeStmtRd(id.lex());
 		}
 
