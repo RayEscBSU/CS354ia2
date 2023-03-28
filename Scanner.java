@@ -115,6 +115,12 @@ public class Scanner {
 		s.add("(");
 		s.add(")");
 		s.add(";");
+		s.add(">");
+		s.add("<");
+		s.add(">=");
+		s.add("<=");
+		s.add("<>");
+		s.add("==");
 	}
 
 	// This method defines initComments, it takes a set
@@ -134,6 +140,15 @@ public class Scanner {
 	// Arguments:
 	//     s  = Set of strings passed in 
 	private void initKeywords(Set<String> s) {
+		s.add("rd");
+		s.add("wr");
+		s.add("if");
+		s.add("then");
+		s.add("else");
+		s.add("while");
+		s.add("do");
+		s.add("begin");
+		s.add("end");
 	}
 
 	// constructor:
@@ -236,7 +251,7 @@ public class Scanner {
 	// This method is used create a token substring 
 	// from the "old" to "pos". It checks if the 
 	// lexeme contains an operator, if it does it
-	// creates a new token object conatianing the 
+	// creates a new token object containing the
 	// operator lexmeme
 	//
 	// If it reaches an invalid charactor or the end 

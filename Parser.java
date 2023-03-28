@@ -3,7 +3,7 @@
 // It constructs and has-a Scanner for the program
 // being parsed.
 public class Parser {
-
+	//TODO: Implement boolexpr, relop, prog, block
 	private Scanner scanner;
 
 	/**
@@ -127,12 +127,14 @@ public class Parser {
 		return assn;
 	}
 
+	//TODO: implement new parsable statements
 	private NodeStmt parseStmt() throws SyntaxException {
 		NodeAssn assn = parseAssn();
 		match(";");
 		NodeStmt stmt = new NodeStmt(assn);
 		return stmt;
 	}
+
 
 	public Node parse(String program) throws SyntaxException {
 		scanner = new Scanner(program);
@@ -141,5 +143,56 @@ public class Parser {
 		match("EOF");
 		return stmt;
 	}
+
+	//relop
+	private NodeRelop parseRelop() throws SyntaxException {
+		if (curr().equals(new Token("<"))) {
+			match("<");
+			if (curr().equals(new Token("="))) {
+				match("=");
+				return new NodeRelop(pos(), "<=");
+			} else if (curr().equals(new Token(">"))) {
+				match(">");
+				return new NodeRelop(pos(), "<>");
+			} else {
+				return new NodeRelop(pos(), "<");
+			}
+		}
+		if (curr().equals(new Token(">"))) {
+			match(">");
+			if (curr().equals(new Token("="))) {
+				match("=");
+				return new NodeRelop(pos(), ">=");
+			} else {
+				return new NodeRelop(pos(), ">");
+			}
+		}
+		if (curr().equals(new Token("="))) {
+			match("=");
+			return new NodeRelop(pos(), "==");
+		}
+		throw new SyntaxException("Invalid relational operator", pos());
+	}
+
+	//boolean
+	private NodeBoolExpr parseBoolExpr() throws SyntaxException {
+		NodeExpr left = parseExpr();
+		NodeRelop relop = parseRelop();
+		NodeExpr right = parseExpr();
+		NodeAddop addop = parseAddop();
+		NodeMulop mulop = parseMulop();
+		if (addop != null) {
+			NodeBoolExpr boolExpr = parseBoolExpr();
+			boolExpr.append(new NodeBoolExpr(left, relop, right, addop));
+			return boolExpr;
+		} else if (mulop != null) {
+			NodeBoolExpr boolExpr = parseBoolExpr();
+			boolExpr.append(new NodeBoolExpr(left, relop, right, mulop));
+			return boolExpr;
+		} else {
+			return new NodeBoolExpr(left, relop, right, null);
+		}
+	}
+
 
 }
