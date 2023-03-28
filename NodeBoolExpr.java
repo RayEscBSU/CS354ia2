@@ -10,35 +10,39 @@ public class NodeBoolExpr extends Node {
         this.right = right;
     }
 
-    @Override
-    public double eval(Environment env) throws EvalException {
-        double leftValue = left.eval(env);
-        double rightValue = right.eval(env);
-        boolean result;
-        switch (relop.getOp()) {
-            case "<":
-                result = leftValue < rightValue;
-                break;
-            case "<=":
-                result = leftValue <= rightValue;
-                break;
-            case ">":
-                result = leftValue > rightValue;
-                break;
-            case ">=":
-                result = leftValue >= rightValue;
-                break;
-            case "<>":
-                result = leftValue != rightValue;
-                break;
-            case "==":
-                result = leftValue == rightValue;
-                break;
-            default:
-                throw new EvalException("Unknown relop: " + relop.getOp());
-        }
-        return result ? 1 : 0;
+    public boolean eval(Environment env) throws EvalException{
+        return relop.getRelop(left.eval(env), right.eval(env));
     }
+
+//    @Override
+//    public double eval(Environment env) throws EvalException {
+//        double leftValue = left.eval(env);
+//        double rightValue = right.eval(env);
+//        boolean result;
+//        switch (relop.getOp()) {
+//            case "<":
+//                result = leftValue < rightValue;
+//                break;
+//            case "<=":
+//                result = leftValue <= rightValue;
+//                break;
+//            case ">":
+//                result = leftValue > rightValue;
+//                break;
+//            case ">=":
+//                result = leftValue >= rightValue;
+//                break;
+//            case "<>":
+//                result = leftValue != rightValue;
+//                break;
+//            case "==":
+//                result = leftValue == rightValue;
+//                break;
+//            default:
+//                throw new EvalException("Unknown relop: " + relop.getOp());
+//        }
+//        return result ? 1 : 0;
+//    }
 
     @Override
     public String toString() {
