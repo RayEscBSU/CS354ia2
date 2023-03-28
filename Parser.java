@@ -171,7 +171,7 @@ public class Parser {
 			match("=");
 			return new NodeRelop(pos(), "==");
 		}
-		throw new SyntaxException("Invalid relational operator", pos());
+		throw new SyntaxException(pos(), new Token("ANY") ,curr());
 	}
 
 	//boolean
@@ -179,19 +179,7 @@ public class Parser {
 		NodeExpr left = parseExpr();
 		NodeRelop relop = parseRelop();
 		NodeExpr right = parseExpr();
-		NodeAddop addop = parseAddop();
-		NodeMulop mulop = parseMulop();
-		if (addop != null) {
-			NodeBoolExpr boolExpr = parseBoolExpr();
-			boolExpr.append(new NodeBoolExpr(left, relop, right, addop));
-			return boolExpr;
-		} else if (mulop != null) {
-			NodeBoolExpr boolExpr = parseBoolExpr();
-			boolExpr.append(new NodeBoolExpr(left, relop, right, mulop));
-			return boolExpr;
-		} else {
-			return new NodeBoolExpr(left, relop, right, null);
-		}
+		return new NodeBoolExpr(left, relop, right);
 	}
 
 
