@@ -143,7 +143,7 @@ public class Parser {
 			match("id");
 			match("=");
 			NodeExpr expr = parseExpr();
-			return new NodeStmtAssn(id.lex(), expr);
+			return new NodeStmt(id.lex(), expr);
 		}
 		if(curr().equals(new Token("rd")))
 		{
