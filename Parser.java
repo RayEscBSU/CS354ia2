@@ -136,14 +136,15 @@ public class Parser {
 //	}
 	private NodeStmt parseStmt() throws SyntaxException
 	{
-
+		Token firstToken = t;
+		NodeStmt stmt = null;
 		if(curr().equals(new Token("id")))
 		{
 			Token id = curr();
 			match("id");
 			match("=");
 			NodeExpr expr = parseExpr();
-			return new NodeStmt(id.lex(), expr);
+			return new NodeStmtAssn(id.lex(), expr);
 		}
 		if(curr().equals(new Token("rd")))
 		{
@@ -151,7 +152,7 @@ public class Parser {
 			Token id = curr();
 			match("id");
 			match(";");
-			return new NodeStmtRd(id.lex());
+			stmt =  new NodeStmtRd(id.lex());
 		}
 
 		if(curr().equals(new Token("wr")))
