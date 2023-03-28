@@ -11,7 +11,7 @@ public class NodeRelop extends Node {
         return relop;
     }
 
-    public boolean op(double l, double r) throws EvalException {
+    public double op(double l, double r) throws EvalException {
         boolean result;
         switch (getRelop()) {
             case "<":
@@ -35,6 +35,6 @@ public class NodeRelop extends Node {
             default:
                 throw new EvalException(pos, "Unknown relop: " + relop);
         }
-        return result;
+        return result ? 1:0;
     }
 }

@@ -10,7 +10,7 @@ public class NodeBoolExpr extends Node {
         this.right = right;
     }
 
-    public boolean eval(Environment env) throws EvalException{
+    public double eval(Environment env) throws EvalException{
         return relop.op(left.eval(env), right.eval(env));
     }
 
