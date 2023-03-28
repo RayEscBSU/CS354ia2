@@ -11,7 +11,7 @@ public class NodeBoolExpr extends Node {
     }
 
     public boolean eval(Environment env) throws EvalException{
-        return relop.getRelop(left.eval(env), right.eval(env));
+        return relop.op(left.eval(env), right.eval(env));
     }
 
 //    @Override

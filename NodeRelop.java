@@ -10,4 +10,31 @@ public class NodeRelop extends Node {
     public String getRelop() {
         return relop;
     }
+
+    public boolean op(double l, double r) throws EvalException {
+        boolean result;
+        switch (getRelop()) {
+            case "<":
+                result = l < r;
+                break;
+            case "<=":
+                result = l <= r;
+                break;
+            case ">":
+                result = l > r;
+                break;
+            case ">=":
+                result = l >= r;
+                break;
+            case "<>":
+                result = l != r;
+                break;
+            case "==":
+                result = l == r;
+                break;
+            default:
+                throw new EvalException(pos, "Unknown relop: " + relop);
+        }
+        return result;
+    }
 }
