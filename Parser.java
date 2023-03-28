@@ -128,12 +128,73 @@ public class Parser {
 	}
 
 	//TODO: implement new parsable statements
-	private NodeStmt parseStmt() throws SyntaxException {
-		NodeAssn assn = parseAssn();
-		match(";");
-		NodeStmt stmt = new NodeStmt(assn);
-		return stmt;
+//	private NodeStmt parseStmt() throws SyntaxException {
+//		NodeAssn assn = parseAssn();
+//		match(";");
+//		NodeStmt stmt = new NodeStmt(assn);
+//		return stmt;
+//	}
+	private NodeStmt parseStmt() throws SyntaxException
+	{
+
+		if(curr().equals(new Token("id")))
+		{
+			Token id = curr();
+			match("id");
+			match("=");
+			NodeExpr expr = parseExpr();
+			return new NodeStmtAssn(id.lex(), expr);
+		}
+		if(curr().equals(new Token("rd")))
+		{
+			match("rd");
+			Token id = curr();
+			match("id");
+			return new NodeStmtRd(id.lex());
+		}
+
+		if(curr().equals(new Token("wr")))
+		{
+			match("wr");
+			NodeExpr expr = parseExpr();
+			return new NodeStmtWr(expr);
+		}
+
+		if(curr().equals(new Token("if")))
+		{
+			match("if");
+			NodeBoolExpr boolexpr = parseBoolExpr();
+			match("then");
+			NodeStmt ifThenStmt = parseStmt();
+
+			if(curr().lex().equals("else"))
+			{
+				match("else");
+				NodeStmt elseStmt = parseStmt();
+				return new NodeStmtIfThenElse(boolexpr, ifThenStmt, elseStmt);
+			}
+			else
+			{
+				return new NodeStmtIfThen(boolexpr, ifThenStmt);
+			}
+		}
+
+		if(curr().equals(new Token("while")))
+		{
+			match("while");
+			NodeBoolExpr whileBoolexpr = parseBoolExpr();
+			match("do");
+			NodeStmt whileStmt = parseStmt();
+			return new NodeStmtWhile(whileBoolexpr, whileStmt);
+		}
+
+		match("begin");
+		NodeBlock block  = parseBlock();
+		match("end");
+
+		return new NodeStmtBegin(block);
 	}
+
 
 
 	public Node parse(String program) throws SyntaxException {
@@ -144,7 +205,7 @@ public class Parser {
 		return stmt;
 	}
 
-	//relop
+	//TODO: implement Relop
 	private NodeRelop parseRelop() throws SyntaxException {
 		if (curr().equals(new Token("<"))) {
 			match("<");
@@ -174,7 +235,7 @@ public class Parser {
 		throw new SyntaxException(pos(), new Token("ANY") ,curr());
 	}
 
-	//boolean
+	//TODO: implement parseBoolExp
 	private NodeBoolExpr parseBoolExpr() throws SyntaxException {
 		NodeExpr left = parseExpr();
 		NodeRelop relop = parseRelop();
