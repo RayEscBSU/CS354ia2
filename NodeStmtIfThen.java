@@ -1,27 +1,17 @@
-public class NodeStmtIfThen extends NodeStmt{
+public class NodeStmtIfThen extends Node{
 /**
      * Constructs a statement node with the specified assignment node.
      *
      * @param assn the assignment node
      */
     private NodeBoolExpr boolexpr;
-    private Node stmt;
+    private NodeStmt stmt;
 
-    public NodeStmtIfThen(NodeBoolExpr boolexpr, Node stmt) {
+    public NodeStmtIfThen(NodeBoolExpr boolexpr, NodeStmt stmt) {
         this.boolexpr = boolexpr;
         this.stmt = stmt;
     }
 
-    /**
-     * Constructs a statement node with the specified assignment node.
-     *
-     * @param assn the assignment node
-     */
-    public NodeStmtIfThen(NodeAssn assn) {
-        super(assn);
-    }
-
-    @Override
     public double eval(Environment env) throws EvalException {
         if (boolexpr.eval(env) != 0) {
             return stmt.eval(env);

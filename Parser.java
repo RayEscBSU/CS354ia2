@@ -136,8 +136,6 @@ public class Parser {
 //	}
 	private NodeStmt parseStmt() throws SyntaxException
 	{
-		Token firstToken = t;
-		NodeStmt stmt = null;
 		if(curr().equals(new Token("id")))
 		{
 			Token id = curr();
@@ -152,7 +150,7 @@ public class Parser {
 			Token id = curr();
 			match("id");
 			match(";");
-			stmt =  new NodeStmtRd(id.lex());
+			return new NodeStmtRd(id.lex());
 		}
 
 		if(curr().equals(new Token("wr")))
