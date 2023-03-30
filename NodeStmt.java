@@ -6,25 +6,32 @@ public class NodeStmt extends Node {
 	private NodeBoolExpr boolexpr;
 	private NodeStmtIfThen nodeStmtIfThen;
 	private NodeStmtIfThenElse nodeStmtIfThenElse;
+	private NodeWhile nodeWhile;
 
 	/**
 	 Constructs a statement node with the specified assignment node.
 	 @param assn the assignment node
 	 */
-	public NodeStmt(NodeAssn assn, NodeBoolExpr boolexpr, NodeStmtIfThen nodeStmtIfThen, NodeStmtIfThenElse nodeStmtIfThenElse) {
+	public NodeStmt(NodeAssn assn, NodeBoolExpr boolexpr, NodeStmtIfThen nodeStmtIfThen,
+					NodeStmtIfThenElse nodeStmtIfThenElse, NodeWhile nodeWhile) {
 		this.assn = assn;
 		this.boolexpr = boolexpr;
 		this.nodeStmtIfThen = nodeStmtIfThen;
 		this.nodeStmtIfThenElse = nodeStmtIfThenElse;
+		this.nodeWhile = nodeWhile;
 	}
 
 	public NodeStmt(NodeAssn assn, NodeBoolExpr boolexpr, NodeStmtIfThen nodeStmtIfThen) {
-		this(assn, boolexpr, nodeStmtIfThen, null);
+		this(assn, boolexpr, nodeStmtIfThen, null, null);
 	}
 
 	public NodeStmt(NodeAssn assn, NodeBoolExpr boolexpr) {
-		this(assn, boolexpr, null,null);
+		this(assn, boolexpr, null,null,null);
 
+	}
+
+	public NodeStmt(NodeAssn assn, NodeWhile nodeWhile) {
+		this(assn, null, null, null, nodeWhile);
 	}
 
 
