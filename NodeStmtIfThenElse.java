@@ -25,11 +25,11 @@ public class NodeStmtIfThenElse extends NodeStmt {
 
     @Override
     public double eval(Environment env) throws EvalException {
-        boolean condition = boolexpr.eval(env);
-        if (condition) {
-            return ifThenStmt.eval(env);
+        if (boolexpr.eval(env) != 0) {
+           return ifThenStmt.eval(env);
         } else {
-            return elseStmt.eval(env);
+            return  elseStmt.eval(env);
         }
     }
+
 }

@@ -9,11 +9,10 @@ public class NodeStmtIfThen extends NodeStmt{
 
 
     public NodeStmtIfThen(NodeBoolExpr boolexpr, NodeStmt stmt) {
+        super(null, null);
         this.boolexpr = boolexpr;
         this.stmt = stmt;
     }
-
-
 
     public double eval(Environment env) throws EvalException {
         if (boolexpr.eval(env) != 0) {

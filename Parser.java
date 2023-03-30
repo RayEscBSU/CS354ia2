@@ -141,8 +141,8 @@ public class Parser {
 			Token id = curr();
 			match("id");
 			match("=");
-			NodeExpr expr = parseExpr();
-			return new NodeStmtAssn(id.lex(), expr);
+			NodeAssn assn = new NodeAssn(id.lex(), parseExpr());
+			return new NodeStmt(assn, null);
 		}
 		if(curr().equals(new Token("rd")))
 		{
@@ -150,7 +150,7 @@ public class Parser {
 			Token id = curr();
 			match("id");
 			match(";");
-			return new NodeRd(id.lex());
+			return new NodeStmt(null, null, null, null, null,id.lex(),null);
 		}
 
 		if(curr().equals(new Token("wr")))
