@@ -57,7 +57,7 @@ public class NodeStmt extends Node {
 		} else if (nodeWr != null) {
 			return nodeWr.eval(env);
 		} else {
-			throw new SyntaxException( pos(), + "No statement available for evaluation.");
+			throw new SyntaxException( pos(),  "No statement available for evaluation.");
 		}
 	}
 

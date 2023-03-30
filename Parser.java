@@ -134,70 +134,60 @@ public class Parser {
 //		NodeStmt stmt = new NodeStmt(assn);
 //		return stmt;
 //	}
-	private NodeStmt parseStmt() throws SyntaxException
-	{
-		if(curr().equals(new Token("id")))
-		{
+	private NodeStmt parseStmt() throws SyntaxException {
+		if (curr().equals(new Token("id"))) {
 			Token id = curr();
 			match("id");
 			match("=");
 			NodeAssn assn = new NodeAssn(id.lex(), parseExpr());
 			return new NodeStmt(assn, null);
 		}
-		if(curr().equals(new Token("rd")))
-		{
+		if (curr().equals(new Token("rd"))) {
 			match("rd");
 			Token id = curr();
 			match("id");
 			match(";");
-			return new NodeStmt(null, null, null, null, null,id.lex(),null);
+			return new NodeStmt(null, null, null, null, null, new NodeRd(id.lex()), null);
 		}
 
-		if(curr().equals(new Token("wr")))
-		{
+		if (curr().equals(new Token("wr"))) {
 			match("wr");
 			NodeExpr expr = parseExpr();
 			match(";");
-			return new NodeStmtWr(expr);
-		}
+			return new NodeStmt(null, null, null, null, null, null, new NodeWr(expr));
 
-		if(curr().equals(new Token("if")))
-		{
-			match("if");
-			NodeBoolExpr boolexpr = parseBoolExpr();
-			match("then");
-			NodeStmt ifThenStmt = parseStmt();
-			match(";");
-			if(curr().lex().equals("else"))
-			{
-				match("else");
-				NodeStmt elseStmt = parseStmt();
+			if (curr().equals(new Token("if"))) {
+				match("if");
+				NodeBoolExpr boolexpr = parseBoolExpr();
+				match("then");
+				NodeStmt ifThenStmt = parseStmt();
 				match(";");
-				return new NodeStmtIfThenElse(boolexpr, ifThenStmt, elseStmt);
+				if (curr().lex().equals("else")) {
+					match("else");
+					NodeStmt elseStmt = parseStmt();
+					match(";");
+					return new NodeStmtIfThenElse(boolexpr, ifThenStmt, elseStmt);
+				} else {
+					return new NodeStmtIfThen(boolexpr, ifThenStmt);
+				}
 			}
-			else
-			{
-				return new NodeStmtIfThen(boolexpr, ifThenStmt);
+
+			if (curr().equals(new Token("while"))) {
+				match("while");
+				NodeBoolExpr whileBoolexpr = parseBoolExpr();
+				match("do");
+				NodeStmt whileStmt = parseStmt();
+				return new NodeStmt(null, whileBoolexpr,null,null, new NodeWhile( whileBoolexpr, whileStmt), null, null);
 			}
+
+			match("begin");
+			NodeBlock block = parseBlock();
+			match("end");
+			match(";");
+			return new NodeStmtBegin(block);
 		}
 
-		if(curr().equals(new Token("while")))
-		{
-			match("while");
-			NodeBoolExpr whileBoolexpr = parseBoolExpr();
-			match("do");
-			NodeStmt whileStmt = parseStmt();
-			return new NodeStmtWhile(whileBoolexpr, whileStmt);
-		}
-
-		match("begin");
-		NodeBlock block  = parseBlock();
-		match("end");
-		match(";");
-		return new NodeStmtBegin(block);
 	}
-
-
 
 	public Node parse(String program) throws SyntaxException {
 		scanner = new Scanner(program);
