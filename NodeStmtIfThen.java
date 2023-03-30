@@ -1,4 +1,4 @@
-public class NodeStmtIfThen extends Node{
+public class NodeStmtIfThen extends NodeStmt{
 /**
      * Constructs a statement node with the specified assignment node.
      *
@@ -7,10 +7,13 @@ public class NodeStmtIfThen extends Node{
     private NodeBoolExpr boolexpr;
     private NodeStmt stmt;
 
+
     public NodeStmtIfThen(NodeBoolExpr boolexpr, NodeStmt stmt) {
         this.boolexpr = boolexpr;
         this.stmt = stmt;
     }
+
+
 
     public double eval(Environment env) throws EvalException {
         if (boolexpr.eval(env) != 0) {

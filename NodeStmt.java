@@ -3,14 +3,30 @@
 public class NodeStmt extends Node {
 
 	private NodeAssn assn;
+	private NodeBoolExpr boolexpr;
+	private NodeStmtIfThen nodeStmtIfThen;
+	private NodeStmtIfThenElse nodeStmtIfThenElse;
 
 	/**
 	 Constructs a statement node with the specified assignment node.
 	 @param assn the assignment node
 	 */
-	public NodeStmt(NodeAssn assn) {
-		this.assn=assn;
+	public NodeStmt(NodeAssn assn, NodeBoolExpr boolexpr, NodeStmtIfThen nodeStmtIfThen, NodeStmtIfThenElse nodeStmtIfThenElse) {
+		this.assn = assn;
+		this.boolexpr = boolexpr;
+		this.nodeStmtIfThen = nodeStmtIfThen;
+		this.nodeStmtIfThenElse = nodeStmtIfThenElse;
 	}
+
+	public NodeStmt(NodeAssn assn, NodeBoolExpr boolexpr, NodeStmtIfThen nodeStmtIfThen) {
+		this(assn, boolexpr, nodeStmtIfThen, null);
+	}
+
+	public NodeStmt(NodeAssn assn, NodeBoolExpr boolexpr) {
+		this(assn, boolexpr, null,null);
+
+	}
+
 
 	/**
 	 Evaluates the statement by evaluating the assignment node contained within it.

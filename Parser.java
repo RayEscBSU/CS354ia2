@@ -150,13 +150,14 @@ public class Parser {
 			Token id = curr();
 			match("id");
 			match(";");
-			return new NodeStmtRd(id.lex());
+			return new NodeRd(id.lex());
 		}
 
 		if(curr().equals(new Token("wr")))
 		{
 			match("wr");
 			NodeExpr expr = parseExpr();
+			match(";");
 			return new NodeStmtWr(expr);
 		}
 
@@ -166,11 +167,12 @@ public class Parser {
 			NodeBoolExpr boolexpr = parseBoolExpr();
 			match("then");
 			NodeStmt ifThenStmt = parseStmt();
-
+			match(";");
 			if(curr().lex().equals("else"))
 			{
 				match("else");
 				NodeStmt elseStmt = parseStmt();
+				match(";");
 				return new NodeStmtIfThenElse(boolexpr, ifThenStmt, elseStmt);
 			}
 			else
@@ -191,7 +193,7 @@ public class Parser {
 		match("begin");
 		NodeBlock block  = parseBlock();
 		match("end");
-
+		match(";");
 		return new NodeStmtBegin(block);
 	}
 

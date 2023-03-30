@@ -16,7 +16,6 @@ public class NodeExpr extends Node {
 		this.addop=addop;
 		this.expr=expr;
 	}
-
 	/**
 	 Append another expression node to this one.
 	 @param expr the expression node to append

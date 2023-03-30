@@ -1,4 +1,4 @@
-public class NodeStmtRd extends NodeStmt{
+public class NodeRd extends NodeStmt{
 
     //Store scanner as a static variable
     static Scanner s = null;
@@ -10,7 +10,7 @@ public class NodeStmtRd extends NodeStmt{
      *
      * @param assn the assignment node
      */
-    public NodeStmtRd(NodeAssn assn) {
+    public NodeRd(NodeAssn assn) {
         super(assn);
     }
 
