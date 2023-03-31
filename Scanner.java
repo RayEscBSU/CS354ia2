@@ -268,19 +268,47 @@ public class Scanner {
 	// 	 lexeme - stores substring from "old" - "pos"
 	//   token - new token created contains token type 
 	private void nextOp() {
-		int old=pos;
-		pos=old+2;
-		if (!done()) {
-			String lexeme=program.substring(old,pos);
-			if (operators.contains(lexeme)) {
-				token=new Token(lexeme); // two-char operator
+		String c = program.charAt(pos) + "";
+		if (operators.contains(c)) {
+			// Single-character operator
+			token = new Token(c);
+			pos++;
+			return;
+		}
+		if (c.equals("<") || c.equals(">")) {
+			// Less-than or greater-than operator
+			if (pos + 1 < program.length() && program.charAt(pos + 1) == '=') {
+				// Combined operator
+				token = new Token(program.substring(pos, pos + 2));
+				pos += 2;
+				return;
+			} else {
+				// Single-character operator
+				token = new Token(c);
+				pos++;
 				return;
 			}
 		}
-		pos=old+1;
-		String lexeme=program.substring(old,pos);
-		token=new Token(lexeme); // one-char operator
+		if (c.equals("=")) {
+			// Equal operator
+			if (pos + 1 < program.length() && program.charAt(pos + 1) == '=') {
+				// Combined operator
+				token = new Token("==");
+				pos += 2;
+				return;
+			} else {
+				// Single-character operator
+				token = new Token(c);
+				pos++;
+				return;
+			}
+		}
+		System.err.println("illegal character at position " + pos);
+		pos++;
+		next();
 	}
+
+
 
 	// This method determines the kind of the next token (e.g., "id"),
 	// and calls a method to scan that token's lexeme (e.g., "foo").

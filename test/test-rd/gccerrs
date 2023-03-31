@@ -1,0 +1,4 @@
+test-rd/gen.c:3:10: warning: unused variable 'x' [-Wunused-variable]
+  double x;
+         ^
+1 warning generated.

@@ -2,8 +2,8 @@
 int main() {
   double x;
   {
-    x = 1.5 + 3.5;
-    printf("%g\n", (double)(1.5 + 3.5));
+    x = 1;
+    printf("%g\n", (double)(1));
     ;
   }
   return 0;

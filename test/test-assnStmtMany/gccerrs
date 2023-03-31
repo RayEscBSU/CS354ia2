@@ -1,0 +1,4 @@
+test-assnStmtMany/gen.c:3:10: warning: variable 'f' set but not used [-Wunused-but-set-variable]
+  double f, x, y, z;
+         ^
+1 warning generated.
