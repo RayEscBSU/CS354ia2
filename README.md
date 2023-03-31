@@ -1,6 +1,6 @@
 # README
                                                                                             
-Run 
+# Run 
        How to run: 
               From directory where source files are located    
 
@@ -18,32 +18,28 @@ Run
 
 
 
-DESCRIPTION
+# DESCRIPTION
        Our assignment is to extend a translator provided by the professor for a small
        programing language. The translator is both an interpreter and a compiler. The
        interpreter and compiler are implemented using Java, however the compilers
        target language is C. 
 
               TODO:
-                     A - Finish documenting provided source code in Scanner.java
-                     B - Extend the scanner to support source-code comments, design
-                            our own form of comments
-                     C - Change the Environment object to translate each command
-                            line argument as exactly one assignment statement
-                     D - Add a prefix unary mins operator
-                     E- Change the translator to support double values instead of 
-                            integer values 
+                     A - Extned the scnaner to recoginize new keywords and operators
+                     B - Extend the parser to recognize new grammer rules
+                     C - Extend the interpreter to evaluate new grammer rules
+              What I did: 
+                    Extended the scanner, parser and evaluator/generator to recognize new keywords, operators and grammer rules. 
+                         I added the following: 
+                                - relational operators - <, >, <=, >=, ==, !=
+                                - if statements - if, then, else
+                                - block statements - begin, end
+                                - read statements - rd 
+                                - write statements - wr
+                                - while statements - while, do
+                      
 
-              What I did 
-                     A - Finished document all functions for all files included
-                     B - Extended the the scanner to accept comment lines that 
-                         start with "#", comment lines are completly skipped
-                     C - Created a HashMap to store var and val values 
-                     D - Added a unary variable to my grammer that allows '-'
-                     E - Change all functions from "int" to "double",  added 
-                            "." do the digits set
-
-FILES
+# FILES
        tst - test directory 
               test-minus    - stores test files that test minus operations
               test-plus     - stores test files that test plus operations
@@ -73,21 +69,26 @@ FILES
               Scannar. java (provided) - scanner for program
               SyntaxException.java (provided) - handles syntax exceptions 
               Token.java (provided) - models a token
-       
+              NodeBlock.java - defines NodeBlock
+              NodeIf.java - defines NodeIf
+              NodeRelop.java - defines NodeRelop
+              NodeWhile.java - defines NodeWhile
+              NodeRd.java - defines NodeRd
+              NodeWr.java - defines NodeWr
+              NodeStmtIfThen.java - defines NodeStmtIfThen
+              NodeStmtIfThenElse.java - defines NodeStmtIfThenElse             
+              NodeStmtWhileDo.java - defines NodeStmtWhile
+              NodeStmtAssn.java - defines NodeStmtAssn
+             
 
-Results
+
+# Results
        Refer to included file testResults
-
-       I did run in to an issue when testing the expected out put for doubles. For 
-       example prog = 1.0 + 1.0, exp = 2.0, my out.i file would match the expected
-       value of 2.0, but my test would still fail. It was calculating the correct 
-       values but failing my test, as a workaround I casted my values to an int and
-       so that it would pass the regression tester. Because of this I am not able 
-       to compute percentages as a double. Such as 2.0 / 4.0 = .5. 
        
+       I was able to get most of the added features implemented but they are not working exactly as expected. I have some bugs that I was not able to fix. Howevr my test for the ia1 are all passing.
 
 
-Teting 
+# Testing 
        Testing was done using the regression tester. Test files
        are located in the 'test' directory.
 
@@ -104,11 +105,16 @@ Teting
                      test-mul - test multiply (int and double)
                      test-divide - test divide (int and double)
                      teest-two - test muntiple prog files (int and double)
-                     test-unearthly - test weird inputs, Ex "==", "++"
+                     test-relop - test relational operators (int and double)
+                     test-if - test if statements (int and double)
+                     test-block - test block statements (int and double)
+                     test-rd - test read statements (int and double)
+                     test-wr - test write statements (int and double)
+                     test-while - test while statements (int and double)
             
 
 
-CREDITS
+# CREDITS
        Author:       Raymundo Escobedo 
        Date:         Spring 2023
        Class:        CS 354
