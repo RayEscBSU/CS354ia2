@@ -11,7 +11,7 @@ public class NodeStmtWhileDo extends NodeStmt {
      @param NodeStmt the loop NodeStmt node
      */
     public NodeStmtWhileDo(NodeBoolExpr NodeBoolExpr, NodeStmt NodeStmt) {
-        super(null, NodeBoolExpr, null, null, null);
+        super(null, NodeBoolExpr, null, null, null,null, null, null);
         this.NodeBoolExpr = NodeBoolExpr;
         this.NodeStmt = NodeStmt;
     }

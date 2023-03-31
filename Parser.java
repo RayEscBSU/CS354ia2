@@ -136,22 +136,27 @@ public class Parser {
 			Token id = curr();
 			match("id");
 			match("=");
-			NodeAssn assn = new NodeAssn(id.lex(), parseExpr());
+			NodeExpr expr = parseExpr();
+			match(";");
+			NodeAssn assn = new NodeAssn(id.lex(), expr);
 			return new NodeStmt(assn, null);
 		}
+
 		if (curr().equals(new Token("rd"))) {
 			match("rd");
 			Token id = curr();
 			match("id");
 			match(";");
-			return new NodeStmt(null, null, null, null, null, new NodeRd(id.lex()), null,null);
+			return new NodeStmt(null, null, null, null,
+					null, new NodeRd(id.lex()), null,null);
 		}
 
 		if (curr().equals(new Token("wr"))) {
 			match("wr");
 			NodeExpr expr = parseExpr();
 			match(";");
-			return new NodeStmt(null, null, null, null, null, null, new NodeWr(expr), null);
+			return new NodeStmt(null, null, null, null,
+					null, null, new NodeWr(expr), null);
 		}
 
 		if (curr().equals(new Token("if"))) {
@@ -175,7 +180,8 @@ public class Parser {
 			NodeBoolExpr whileBoolexpr = parseBoolExpr();
 			match("do");
 			NodeStmt whileStmt = parseStmt();
-			return new NodeStmt(null, whileBoolexpr, null, null, new NodeWhile(whileBoolexpr, whileStmt), null, null,null);
+			return new NodeStmt(null, whileBoolexpr, null, null,
+					new NodeWhile(whileBoolexpr, whileStmt), null, null,null);
 		}
 
 		if (curr().equals(new Token("begin"))) {
@@ -183,7 +189,8 @@ public class Parser {
 			NodeBlock block = parseBlock();
 			match("end");
 			match(";");
-			return new NodeStmt(null, null, null, null, null, null, null, block);
+			return new NodeStmt(null, null, null, null,
+					null, null, null, block);
 		}
 		return null;
 	}
