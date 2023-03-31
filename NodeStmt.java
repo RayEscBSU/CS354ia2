@@ -9,13 +9,14 @@ public class NodeStmt extends Node {
 	private NodeWhile nodeWhile;
 	private NodeRd nodeRd;
 	private NodeWr nodeWr;
+	private NodeBlock nodeBlock;
 
 	/**
 	 Constructs a statement node with the specified assignment node.
 	 @param assn the assignment node
 	 */
 	public NodeStmt(NodeAssn assn, NodeBoolExpr boolexpr, NodeStmtIfThen nodeStmtIfThen,
-					NodeStmtIfThenElse nodeStmtIfThenElse, NodeWhile nodeWhile, NodeRd nodeRd, NodeWr nodeWr) {
+					NodeStmtIfThenElse nodeStmtIfThenElse, NodeWhile nodeWhile, NodeRd nodeRd, NodeWr nodeWr,  NodeBlock nodeBlock) {
 		this.assn = assn;
 		this.boolexpr = boolexpr;
 		this.nodeStmtIfThen = nodeStmtIfThen;
@@ -23,14 +24,15 @@ public class NodeStmt extends Node {
 		this.nodeWhile = nodeWhile;
 		this.nodeRd = nodeRd;
 		this.nodeWr = nodeWr;
+		this.nodeBlock = nodeBlock;
 	}
 
 	public NodeStmt(NodeAssn assn, NodeBoolExpr boolexpr, NodeStmtIfThen nodeStmtIfThen) {
-		this(assn, boolexpr, nodeStmtIfThen, null, null, null, null);
+		this(assn, boolexpr, nodeStmtIfThen, null, null, null, null, null);
 	}
 
 	public NodeStmt(NodeAssn assn, NodeBoolExpr boolexpr) {
-		this(assn, boolexpr, null,null,null, null, null);
+		this(assn, boolexpr, null,null,null, null, null, null);
 
 	}
 
@@ -57,7 +59,7 @@ public class NodeStmt extends Node {
 		} else if (nodeWr != null) {
 			return nodeWr.eval(env);
 		} else {
-			throw new SyntaxException( pos(),  "No statement available for evaluation.");
+			return 0.0;
 		}
 	}
 

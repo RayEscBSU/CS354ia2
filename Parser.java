@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 // This class is a recursive-descent parser,
 // modeled after the programming language's grammar.
 // It constructs and has-a Scanner for the program
@@ -128,12 +131,6 @@ public class Parser {
 	}
 
 	//TODO: implement new parsable statements
-//	private NodeStmt parseStmt() throws SyntaxException {
-//		NodeAssn assn = parseAssn();
-//		match(";");
-//		NodeStmt stmt = new NodeStmt(assn);
-//		return stmt;
-//	}
 	private NodeStmt parseStmt() throws SyntaxException {
 		if (curr().equals(new Token("id"))) {
 			Token id = curr();
@@ -147,47 +144,51 @@ public class Parser {
 			Token id = curr();
 			match("id");
 			match(";");
-			return new NodeStmt(null, null, null, null, null, new NodeRd(id.lex()), null);
+			return new NodeStmt(null, null, null, null, null, new NodeRd(id.lex()), null,null);
 		}
 
 		if (curr().equals(new Token("wr"))) {
 			match("wr");
 			NodeExpr expr = parseExpr();
 			match(";");
-			return new NodeStmt(null, null, null, null, null, null, new NodeWr(expr));
+			return new NodeStmt(null, null, null, null, null, null, new NodeWr(expr), null);
+		}
 
-			if (curr().equals(new Token("if"))) {
-				match("if");
-				NodeBoolExpr boolexpr = parseBoolExpr();
-				match("then");
-				NodeStmt ifThenStmt = parseStmt();
+		if (curr().equals(new Token("if"))) {
+			match("if");
+			NodeBoolExpr boolexpr = parseBoolExpr();
+			match("then");
+			NodeStmt ifThenStmt = parseStmt();
+			match(";");
+			if (curr().lex().equals("else")) {
+				match("else");
+				NodeStmt elseStmt = parseStmt();
 				match(";");
-				if (curr().lex().equals("else")) {
-					match("else");
-					NodeStmt elseStmt = parseStmt();
-					match(";");
-					return new NodeStmtIfThenElse(boolexpr, ifThenStmt, elseStmt);
-				} else {
-					return new NodeStmtIfThen(boolexpr, ifThenStmt);
-				}
+				return new NodeStmtIfThenElse(boolexpr, ifThenStmt, elseStmt);
+			} else {
+				return new NodeStmtIfThen(boolexpr, ifThenStmt);
 			}
+		}
 
-			if (curr().equals(new Token("while"))) {
-				match("while");
-				NodeBoolExpr whileBoolexpr = parseBoolExpr();
-				match("do");
-				NodeStmt whileStmt = parseStmt();
-				return new NodeStmt(null, whileBoolexpr,null,null, new NodeWhile( whileBoolexpr, whileStmt), null, null);
-			}
+		if (curr().equals(new Token("while"))) {
+			match("while");
+			NodeBoolExpr whileBoolexpr = parseBoolExpr();
+			match("do");
+			NodeStmt whileStmt = parseStmt();
+			return new NodeStmt(null, whileBoolexpr, null, null, new NodeWhile(whileBoolexpr, whileStmt), null, null,null);
+		}
 
+		if (curr().equals(new Token("begin"))) {
 			match("begin");
 			NodeBlock block = parseBlock();
 			match("end");
 			match(";");
-			return new NodeStmtBegin(block);
+			return new NodeStmt(null, null, null, null, null, null, null, block);
 		}
-
+		return null;
 	}
+
+
 
 	public Node parse(String program) throws SyntaxException {
 		scanner = new Scanner(program);
@@ -233,6 +234,19 @@ public class Parser {
 		NodeRelop relop = parseRelop();
 		NodeExpr right = parseExpr();
 		return new NodeBoolExpr(left, relop, right);
+	}
+
+	private NodeBlock parseBlock() throws SyntaxException {
+		List<NodeStmt> stmtList = new ArrayList<>();
+		while (!curr().equals(new Token("end"))) {
+			NodeStmt stmt = parseStmt();
+			stmtList.add(stmt);
+			if (!curr().equals(new Token(";"))) {
+				throw new SyntaxException(pos(), new Token(";"), curr());
+			}
+			match(";");
+		}
+		return new NodeBlock(stmtList);
 	}
 
 
